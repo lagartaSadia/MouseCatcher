@@ -17,7 +17,9 @@ class Menu:
 
         while True:
             self.window.blit(source=self.surf, dest=self.rect)
-            self.menu_text(70, "Mouse Catcher", (21, 197, 27), ((WIN_WIDTH / 2), 230))
+            self.menu_text(70, "Mouse Catcher", (200,200,200), ((WIN_WIDTH / 2), 200))
+            self.menu_text(45, "Play Now", (17, 208, 58), ((WIN_WIDTH / 2) - 100, 270))
+            self.menu_text(45, "Score", (0,10,0), ((WIN_WIDTH / 2) + 100, 270))
 
             pygame.display.flip()
 
@@ -27,7 +29,7 @@ class Menu:
                     quit()
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
-        text_font: Font = pygame.font.SysFont(name="Lucida Sans Typewriter", size=text_size)
+        text_font: Font = pygame.font.Font("./asset/Font/PixelifySans.ttf", size=text_size)
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(center=text_center_pos)
         self.window.blit(source=text_surf, dest=text_rect)
