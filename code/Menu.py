@@ -39,7 +39,7 @@ class Menu:
                         else:
                             option = 0
                     if event.key == pygame.K_RETURN:
-                        print(MENU_OPTION[option])
+                        return MENU_OPTION[option]
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
         text_font: Font = pygame.font.Font("./asset/Font/PixelifySans.ttf", size=text_size)
