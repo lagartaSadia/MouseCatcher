@@ -8,7 +8,7 @@ from code.Const import WIN_WIDTH, WHITE, GREEN, BLACK, MENU_OPTION
 class Menu:
     def __init__(self, window):
         self.window = window
-        self.surf = pygame.image.load('./asset/Background/2/forestbridge.png')
+        self.surf = pygame.image.load('./asset/Background/2/forestbridge.png').convert()
         self.rect = self.surf.get_rect()
 
     def run(self,):
