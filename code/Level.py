@@ -2,6 +2,7 @@ import pygame
 
 from code.Const import WIN_WIDTH, WIN_HEIGHT
 from code.Menu import Menu
+from code.Player import Player
 
 
 class Level:
@@ -11,13 +12,17 @@ class Level:
         self.name = name
 
     def run(self):
-        surf = pygame.image.load('./asset/Background/forestbridge.png').convert()
+        surf = pygame.image.load('./asset/Background/forestbridge.png')
         rect = surf.get_rect()
-        player = pygame.image.load('./asset/Sprites/Cat walk1.png').convert()
+        player = Player()
+        all_sprites = pygame.sprite.Group()
+        all_sprites.add(player)
 
         while True:
             self.window.blit(surf, rect)
-            self.window.blit(player, ((WIN_WIDTH / 2), (WIN_HEIGHT / 2)))
+            # self.window.blit(player, ((WIN_WIDTH / 2), (WIN_HEIGHT / 2)))
+            all_sprites.draw(self.window, )
+            all_sprites.update()
 
             pygame.display.flip()
 
