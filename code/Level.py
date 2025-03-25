@@ -10,18 +10,29 @@ class Level:
     def __init__(self, window, name):
         self.window = window
         self.name = name
+        self.clock = pygame.time.Clock()
 
     def run(self):
-        surf = pygame.image.load('./asset/Background/forestbridge.png')
-        rect = surf.get_rect()
+        forest = pygame.image.load('./asset/Background/forest.png')
+
+        bridge = pygame.image.load('./asset/Background/bridge.png')
+
+        grass = pygame.image.load('./asset/Background/grass.png')
+
         player = Player()
         all_sprites = pygame.sprite.Group()
         all_sprites.add(player)
 
         while True:
-            self.window.blit(surf, rect)
-            # self.window.blit(player, ((WIN_WIDTH / 2), (WIN_HEIGHT / 2)))
-            all_sprites.draw(self.window, )
+            self.clock.tick(30)
+
+            self.window.blit(forest, forest.get_rect())
+
+
+            self.window.blit(bridge, (0, 133))
+            self.window.blit(grass, (0, 300))
+
+            all_sprites.draw(self.window)
             all_sprites.update()
 
             pygame.display.flip()
@@ -31,3 +42,7 @@ class Level:
                     if event.key == pygame.K_ESCAPE:
                         menu = Menu(self.window)
                         menu.run()
+                    if event.key == pygame.K_w:
+                        player.update('up')
+                    if event.key == pygame.K_s:
+                        player.update('down')
