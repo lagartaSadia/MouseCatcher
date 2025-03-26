@@ -11,6 +11,7 @@ class Level:
         self.window = window
         self.name = name
         self.clock = pygame.time.Clock()
+        self.color = (211,211,211)
 
     def run(self):
         forest = pygame.image.load('./asset/Background/forest.png')
@@ -26,14 +27,19 @@ class Level:
         while True:
             self.clock.tick(30)
 
-            self.window.blit(forest, forest.get_rect())
+            top_wall = pygame.draw.rect(self.window, self.color, pygame.Rect(30, 45, 100, 80))
+            bottom_wall = pygame.draw.rect(self.window, self.color, pygame.Rect(45, 400, 100, 20))
 
+            self.window.blit(forest, forest.get_rect())
 
             self.window.blit(bridge, (0, 133))
             self.window.blit(grass, (0, 300))
 
-            all_sprites.draw(self.window)
+            cat = all_sprites.draw(self.window)
             all_sprites.update()
+
+            if top_wall.colliderect(player) or bottom_wall.colliderect(player):
+                player.velocity = 0
 
             pygame.display.flip()
 
@@ -46,3 +52,7 @@ class Level:
                         player.update('up')
                     if event.key == pygame.K_s:
                         player.update('down')
+
+    def crash(self, cat, enemy):
+
+        pass
