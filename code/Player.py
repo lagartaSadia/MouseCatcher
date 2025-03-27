@@ -18,19 +18,22 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (38 * 2, 25 * 2))
         self.rect = self.image.get_rect()
         self.rect.topleft = 50,200
-        self.velocity = 0
 
-    def update(self, direction = None):
+    def update(self):
         self.state += 0.5
         if self.state >= len(self.sprites):
             self.state = 0
         self.image = self.sprites[int(self.state)]
-        self.rect.y += self.velocity * 5
-
-        match direction:
-            case 'up':
-                self.velocity = -1
-            case 'down':
-                self.velocity = 1
 
         self.image = pygame.transform.scale(self.image, (38 * 2, 25 * 2))
+
+    def move(self):
+        pressed_key = pygame.key.get_pressed()
+        if pressed_key[pygame.K_UP] and self.rect.top > 120:
+            self.rect.centery -= 5
+        elif pressed_key[pygame.K_DOWN] and  self.rect.top < 350:
+            self.rect.centery += 5
+        elif pressed_key[pygame.K_LEFT] and self.rect.left > 0:
+            self.rect.centerx -= 5
+        elif pressed_key[pygame.K_RIGHT] and self.rect.left < 720:
+            self.rect.centerx += 5
