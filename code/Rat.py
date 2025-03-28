@@ -4,6 +4,7 @@ import pygame.sprite
 
 BASE_PATH = './asset/Sprites/Rat/'
 
+
 class Rat(pygame.sprite.Sprite):
 
     def __init__(self, position_y):

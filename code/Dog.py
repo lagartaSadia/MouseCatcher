@@ -4,6 +4,7 @@ import pygame
 
 BASE_PATH = './asset/Sprites/Dog/'
 
+
 class Dog(pygame.sprite.Sprite):
     def __init__(self, position_y):
         super().__init__()
@@ -16,7 +17,8 @@ class Dog(pygame.sprite.Sprite):
 
         self.state = 0
         self.image = self.sprites[self.state]
-        self.image = pygame.transform.flip(pygame.transform.scale(self.image, (38 * 2, 25 * 2)), True, False).convert_alpha()
+        self.image = pygame.transform.flip(pygame.transform.scale(self.image, (38 * 2, 25 * 2)), True,
+                                           False).convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.topleft = 850, self.position_y
         self.velocity = -1
@@ -28,4 +30,5 @@ class Dog(pygame.sprite.Sprite):
         self.image = self.sprites[int(self.state)]
         self.rect.x += self.velocity * 3
 
-        self.image = pygame.transform.flip(pygame.transform.scale(self.image, (38 * 2, 25 * 2)), True, False).convert_alpha()
+        self.image = pygame.transform.flip(pygame.transform.scale(self.image, (38 * 2, 25 * 2)), True,
+                                           False).convert_alpha()

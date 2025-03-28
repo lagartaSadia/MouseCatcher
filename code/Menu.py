@@ -13,8 +13,6 @@ class Menu:
 
     def run(self,):
         option = 0
-        pygame.mixer.music.load('./asset/Sounds/soundtrack.wav')
-        pygame.mixer.music.play(-1)
 
         while True:
             self.window.blit(source=self.surf, dest=self.rect)

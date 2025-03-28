@@ -4,6 +4,7 @@ import pygame
 
 from code.Const import EVENT_ENEMY, WHITE, WIN_WIDTH
 from code.Dog import Dog
+from code.Gameover import Gameover
 from code.Menu import Menu
 from code.Player import Player
 from code.Rat import Rat
@@ -15,7 +16,7 @@ class Level:
         self.window = window
         self.name = name
         self.clock = pygame.time.Clock()
-        self.color = (211,211,211)
+        self.color = (211, 211, 211)
         self.enemies_positions = [150, 200, 250, 300, 350]
         self.food_positions = [150, 200, 250, 300, 350]
         pygame.time.set_timer(EVENT_ENEMY, 1200)
@@ -45,8 +46,8 @@ class Level:
             self.window.blit(bridge, (0, 133))
             self.window.blit(grass, (0, 300))
 
-            level_text.menu_text(30, f'{player.lifes} lifes', (0,0,0), ((WIN_WIDTH / 2), 30))
-            level_text.menu_text(30, f'{player.rats_eaten} rats eaten', (0,0,0), ((WIN_WIDTH / 2), 80))
+            level_text.menu_text(30, f'{player.lifes} lifes', (0, 0, 0), ((WIN_WIDTH / 2), 30))
+            level_text.menu_text(30, f'{player.rats_eaten} rats eaten', (0, 0, 0), ((WIN_WIDTH / 2), 80))
 
             cat_sprites.draw(self.window)
             cat_sprites.update()
@@ -65,13 +66,15 @@ class Level:
                         menu = Menu(self.window)
                         menu.run()
                 if event.type == EVENT_ENEMY:
-                    if random.randint(1,5) == 5:
+                    if random.randint(1, 5) == 5:
                         rat = Rat(random.choice(self.food_positions))
                         rat_sprites.add(rat)
                     else:
                         dog = Dog(random.choice(self.enemies_positions))
                         dog_sprites.add(dog)
 
-
             player.move()
             player.check_if_collision()
+
+            if player.lifes <= 0:
+                Gameover(self.window).run(player.rats_eaten)
