@@ -2,7 +2,7 @@ import random
 
 import pygame
 
-from code.Const import EVENT_ENEMY
+from code.Const import EVENT_ENEMY, WHITE, WIN_WIDTH
 from code.Dog import Dog
 from code.Menu import Menu
 from code.Player import Player
@@ -32,6 +32,8 @@ class Level:
 
         player = Player(dog_sprites, rat_sprites)
 
+        level_text = Menu(self.window)
+
         cat_sprites = pygame.sprite.Group()
         cat_sprites.add(player)
 
@@ -43,14 +45,17 @@ class Level:
             self.window.blit(bridge, (0, 133))
             self.window.blit(grass, (0, 300))
 
+            level_text.menu_text(30, f'{player.lifes} lifes', (0,0,0), ((WIN_WIDTH / 2), 30))
+            level_text.menu_text(30, f'{player.rats_eaten} rats eaten', (0,0,0), ((WIN_WIDTH / 2), 80))
+
             cat_sprites.draw(self.window)
             cat_sprites.update()
 
-            dog_sprites.draw((self.window))
-            dog_sprites.update()
-
             rat_sprites.draw((self.window))
             rat_sprites.update()
+
+            dog_sprites.draw((self.window))
+            dog_sprites.update()
 
             pygame.display.flip()
 
