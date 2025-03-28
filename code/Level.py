@@ -25,9 +25,10 @@ class Level:
 
         grass = pygame.image.load('./asset/Background/grass.png')
 
-        player = Player()
-        all_sprites = pygame.sprite.Group()
-        all_sprites.add(player)
+        dog_sprites = pygame.sprite.Group()
+        player = Player(dog_sprites)
+        cat_sprites = pygame.sprite.Group()
+        cat_sprites.add(player)
 
         while True:
             self.clock.tick(30)
@@ -37,9 +38,11 @@ class Level:
             self.window.blit(bridge, (0, 133))
             self.window.blit(grass, (0, 300))
 
-            all_sprites.draw(self.window)
-            all_sprites.update()
+            cat_sprites.draw(self.window)
+            cat_sprites.update()
 
+            dog_sprites.draw((self.window))
+            dog_sprites.update()
             pygame.display.flip()
 
             for event in pygame.event.get():
@@ -49,5 +52,8 @@ class Level:
                         menu.run()
                 if event.type == EVENT_ENEMY:
                     dog = Dog(random.choice(self.enemies_positions))
-                    all_sprites.add(dog)
+                    dog_sprites.add(dog)
+
+
             player.move()
+            player.check_if_collision()
