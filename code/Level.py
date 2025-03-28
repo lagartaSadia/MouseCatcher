@@ -18,7 +18,7 @@ class Level:
         self.color = (211,211,211)
         self.enemies_positions = [150, 200, 250, 300, 350]
         self.food_positions = [150, 200, 250, 300, 350]
-        pygame.time.set_timer(EVENT_ENEMY, 800)
+        pygame.time.set_timer(EVENT_ENEMY, 1200)
 
     def run(self):
         forest = pygame.image.load('./asset/Background/forest.png')

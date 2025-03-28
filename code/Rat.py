@@ -17,7 +17,7 @@ class Rat(pygame.sprite.Sprite):
 
         self.state = 0
         self.image = self.sprites[self.state]
-        self.image = pygame.transform.flip(self.image, True, False)
+        self.image = pygame.transform.flip(self.image, True, False).convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.topleft = 850, self.position_y
         self.velocity = -1
@@ -29,4 +29,4 @@ class Rat(pygame.sprite.Sprite):
         self.image = self.sprites[int(self.state)]
         self.rect.x += self.velocity * 4
 
-        self.image = pygame.transform.flip(self.image, True, False)
+        self.image = pygame.transform.flip(self.image, True, False).convert_alpha()
