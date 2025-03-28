@@ -1,10 +1,11 @@
 import os
 
-import pygame
+import pygame.sprite
 
-BASE_PATH = './asset/Sprites/Dog/'
+BASE_PATH = './asset/Sprites/Rat/'
 
-class Dog(pygame.sprite.Sprite):
+class Rat(pygame.sprite.Sprite):
+
     def __init__(self, position_y):
         super().__init__()
         self.sprites = []
@@ -16,7 +17,7 @@ class Dog(pygame.sprite.Sprite):
 
         self.state = 0
         self.image = self.sprites[self.state]
-        self.image = pygame.transform.flip(pygame.transform.scale(self.image, (38 * 2, 25 * 2)), True, False)
+        self.image = pygame.transform.flip(self.image, True, False)
         self.rect = self.image.get_rect()
         self.rect.topleft = 850, self.position_y
         self.velocity = -1
@@ -26,6 +27,6 @@ class Dog(pygame.sprite.Sprite):
         if self.state >= len(self.sprites):
             self.state = 0
         self.image = self.sprites[int(self.state)]
-        self.rect.x += self.velocity * 3
+        self.rect.x += self.velocity * 4
 
-        self.image = pygame.transform.flip(pygame.transform.scale(self.image, (38 * 2, 25 * 2)), True, False)
+        self.image = pygame.transform.flip(self.image, True, False)

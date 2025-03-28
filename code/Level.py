@@ -2,10 +2,11 @@ import random
 
 import pygame
 
-from code.Const import WIN_WIDTH, WIN_HEIGHT, EVENT_ENEMY
+from code.Const import EVENT_ENEMY
 from code.Dog import Dog
 from code.Menu import Menu
 from code.Player import Player
+from code.Rat import Rat
 
 
 class Level:
@@ -16,6 +17,7 @@ class Level:
         self.clock = pygame.time.Clock()
         self.color = (211,211,211)
         self.enemies_positions = [150, 200, 250, 300, 350]
+        self.food_positions = [150, 200, 250, 300, 350]
         pygame.time.set_timer(EVENT_ENEMY, 800)
 
     def run(self):
@@ -26,7 +28,10 @@ class Level:
         grass = pygame.image.load('./asset/Background/grass.png')
 
         dog_sprites = pygame.sprite.Group()
-        player = Player(dog_sprites)
+        rat_sprites = pygame.sprite.Group()
+
+        player = Player(dog_sprites, rat_sprites)
+
         cat_sprites = pygame.sprite.Group()
         cat_sprites.add(player)
 
@@ -43,6 +48,10 @@ class Level:
 
             dog_sprites.draw((self.window))
             dog_sprites.update()
+
+            rat_sprites.draw((self.window))
+            rat_sprites.update()
+
             pygame.display.flip()
 
             for event in pygame.event.get():
@@ -51,8 +60,12 @@ class Level:
                         menu = Menu(self.window)
                         menu.run()
                 if event.type == EVENT_ENEMY:
-                    dog = Dog(random.choice(self.enemies_positions))
-                    dog_sprites.add(dog)
+                    if random.randint(1,5) == 5:
+                        rat = Rat(random.choice(self.food_positions))
+                        rat_sprites.add(rat)
+                    else:
+                        dog = Dog(random.choice(self.enemies_positions))
+                        dog_sprites.add(dog)
 
 
             player.move()
