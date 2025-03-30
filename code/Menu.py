@@ -36,7 +36,6 @@ class Menu:
                             option += 1
                         else:
                             option = 0
-                    print(option)
                     if event.key == pygame.K_RETURN:
                         return MENU_OPTION[option]
 
