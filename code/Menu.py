@@ -2,12 +2,12 @@ import pygame.image
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import WIN_WIDTH, WHITE, GREEN, BLACK, MENU_OPTION
+from code.Const import WIN_WIDTH, WHITE, GREEN, BLACK, MENU_OPTION, WIN_HEIGHT
 
 
 class Menu:
-    def __init__(self, window):
-        self.window = window
+    def __init__(self):
+        self.window = pygame.display.set_mode(size=(WIN_WIDTH, WIN_HEIGHT))
         self.surf = pygame.image.load('./asset/Background/forestbridge.png')
         self.rect = self.surf.get_rect()
 
@@ -31,11 +31,12 @@ class Menu:
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_a or event.key == pygame.K_d:
+                    if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                         if option < len(MENU_OPTION) - 1:
                             option += 1
                         else:
                             option = 0
+                    print(option)
                     if event.key == pygame.K_RETURN:
                         return MENU_OPTION[option]
 

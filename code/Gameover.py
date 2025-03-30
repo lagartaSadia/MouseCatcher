@@ -3,6 +3,7 @@ import pygame
 from code.Const import WIN_WIDTH, WIN_HEIGHT
 from code.DBProxy import DBProxy
 from code.Menu import Menu
+from code.Score import Score
 
 
 class Gameover:
@@ -16,7 +17,7 @@ class Gameover:
 
         name = ''
 
-        score_text = Menu(self.window)
+        score_text = Menu()
         while True:
 
             self.window.blit(source=self.surf, dest=self.rect)
@@ -26,6 +27,8 @@ class Gameover:
             score_text.menu_text(20, f'Enter your name to save (3 letters):', (0, 0, 0),
                                  ((WIN_WIDTH / 2), (WIN_HEIGHT / 2)))
 
+            score_text.menu_text(20, name, (0, 0, 0), ((WIN_WIDTH / 2), (WIN_HEIGHT / 2 + 40)))
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -33,12 +36,11 @@ class Gameover:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN and len(name) == 3:
                         db_proxy.save({'name': name, 'score': score})
+                        Score().run()
                     elif event.key == pygame.K_BACKSPACE:
                         name = name[:-1]
                     else:
                         if len(name) < 3:
                             name += event.unicode
-
-            score_text.menu_text(20, name, (0, 0, 0), ((WIN_WIDTH / 2), (WIN_HEIGHT / 2 + 40)))
 
             pygame.display.flip()

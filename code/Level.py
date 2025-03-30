@@ -33,7 +33,7 @@ class Level:
 
         player = Player(dog_sprites, rat_sprites)
 
-        level_text = Menu(self.window)
+        level_text = Menu()
 
         cat_sprites = pygame.sprite.Group()
         cat_sprites.add(player)
@@ -63,7 +63,7 @@ class Level:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
-                        menu = Menu(self.window)
+                        menu = Menu()
                         menu.run()
                 if event.type == EVENT_ENEMY:
                     if random.randint(1, 5) == 5:
